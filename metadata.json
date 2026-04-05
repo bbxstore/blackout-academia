@@ -1,0 +1,7 @@
+{
+  "name": "Blackout Academia - Ramos RJ",
+  "description": "Site oficial da Blackout Academia em Ramos, Rio de Janeiro. Treino sério, ambiente acolhedor e o melhor custo-benefício da região.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
