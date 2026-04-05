@@ -7,9 +7,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { GYM_INFO, getWhatsAppUrl, MAPS_URL, MAPS_EMBED_URL, WHATSAPP_MESSAGES } from './constants';
 import Schedules from './pages/Schedules';
-import logoHorizontal from './assets/logo-horizontal.png';
-import logoSymbol from './assets/logo-symbol.png';
-import heroImage from './assets/gym-hero.webp';
+import logoHorizontal from './assets/logo-horizontal-tight.webp';
+import logoSymbol from './assets/logo-symbol-tight.webp';
+import heroImage from './assets/gym-floor-2.webp';
 import aboutImage from './assets/gym-floor-1.webp';
 import floorImage from './assets/gym-floor-2.webp';
 import machineImage from './assets/gym-floor-3.webp';
@@ -32,7 +32,7 @@ const BrandLogo = ({ compact = false, className = '' }: { compact?: boolean; cla
   <img
     src={compact ? logoSymbol : logoHorizontal}
     alt="Blackout Academia"
-    className={compact ? `h-12 md:h-14 w-auto ${className}` : `h-20 md:h-24 w-auto ${className}`}
+    className={compact ? `h-14 md:h-16 w-auto ${className}` : `h-16 md:h-20 w-auto ${className}`}
   />
 );
 
@@ -134,7 +134,7 @@ const Home = () => {
         {isMenuOpen && (
           <motion.div initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'tween' }} className="fixed inset-0 z-40 bg-brand-black flex flex-col p-10 lg:hidden">
             <div className="flex items-center justify-between mt-6">
-              <BrandLogo className="h-16 md:h-20" />
+              <BrandLogo className="h-20 md:h-24" />
             </div>
             <div className="flex flex-col gap-8 mt-16">
               {navLinks.map((link) => (
@@ -543,7 +543,7 @@ const Home = () => {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
             <div className="flex flex-col gap-6">
-              <BrandLogo />
+              <BrandLogo className="h-16 md:h-20 mx-auto" />
               <p className="text-brand-silver/50 text-sm font-accent font-bold leading-relaxed">
                 Academia em Ramos com musculação, aulas coletivas, atendimento próximo e foco em constância, superação e qualidade de vida.
               </p>
