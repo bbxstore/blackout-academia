@@ -59,6 +59,13 @@ const NeonButton = ({
   );
 };
 
+const navigateTo = (path: string) => {
+  if (typeof window === 'undefined') return;
+  window.history.pushState({}, '', path);
+  window.dispatchEvent(new PopStateEvent('popstate'));
+  window.scrollTo(0, 0);
+};
+
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -75,7 +82,7 @@ const Home = () => {
     { name: 'Sobre', href: '#sobre' },
     { name: 'Modalidades', href: '#modalidades' },
     { name: 'Planos', href: '#planos' },
-    { name: 'Horários', href: '/horarios' },
+    { name: 'Horários', href: '/horarios', internal: true },
     { name: 'Contato', href: '#contato' },
   ];
 
@@ -110,7 +117,12 @@ const Home = () => {
 
           <nav className="hidden lg:flex items-center gap-10">
             {navLinks.map((link) => (
-              <a key={link.name} href={link.href} className="text-xs font-black uppercase tracking-widest hover:text-brand-green transition-colors">
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={link.internal ? (e) => { e.preventDefault(); navigateTo(link.href); } : undefined}
+                className="text-xs font-black uppercase tracking-widest hover:text-brand-green transition-colors"
+              >
                 {link.name}
               </a>
             ))}
@@ -132,7 +144,18 @@ const Home = () => {
           </div>
           <div className="flex flex-col gap-8 mt-16">
             {navLinks.map((link) => (
-              <a key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-4xl font-display uppercase italic hover:text-brand-green">
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => {
+                  setIsMenuOpen(false);
+                  if (link.internal) {
+                    e.preventDefault();
+                    navigateTo(link.href);
+                  }
+                }}
+                className="text-4xl font-display uppercase italic hover:text-brand-green"
+              >
                 {link.name}
               </a>
             ))}
@@ -203,7 +226,7 @@ const Home = () => {
               <NeonButton href={getWhatsAppUrl(WHATSAPP_MESSAGES.general)} className="text-xl">
                 QUERO TREINAR NA BLACKOUT
               </NeonButton>
-              <a href="/horarios" className="flex items-center justify-center gap-3 font-display uppercase italic text-xl text-white hover:text-brand-green transition-all border-2 border-white/10 px-8 py-4 hover:border-brand-green/50">
+              <a href="/horarios" onClick={(e) => { e.preventDefault(); navigateTo('/horarios'); }} className="flex items-center justify-center gap-3 font-display uppercase italic text-xl text-white hover:text-brand-green transition-all border-2 border-white/10 px-8 py-4 hover:border-brand-green/50">
                 VER HORÁRIOS E AULAS <ArrowRight className="w-6 h-6" />
               </a>
             </div>
@@ -377,7 +400,7 @@ const Home = () => {
                 </div>
               ))}
             </div>
-            <a href="/horarios" className="inline-flex items-center gap-3 font-display uppercase italic text-xl text-white hover:text-brand-green transition-all border-2 border-white/10 px-8 py-4 hover:border-brand-green/50">VER QUADRO DE AULAS <ArrowRight className="w-6 h-6" /></a>
+            <a href="/horarios" onClick={(e) => { e.preventDefault(); navigateTo('/horarios'); }} className="inline-flex items-center gap-3 font-display uppercase italic text-xl text-white hover:text-brand-green transition-all border-2 border-white/10 px-8 py-4 hover:border-brand-green/50">VER QUADRO DE AULAS <ArrowRight className="w-6 h-6" /></a>
           </div>
           <div className="border border-white/10 overflow-hidden bg-black/50">
             <img src={neonImage} alt="Ambiente Blackout" className="w-full h-80 object-cover" />
