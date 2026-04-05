@@ -67,15 +67,3 @@
 }
 
 .card-dark:hover::before { @apply opacity-100; }
-
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.marquee-track {
-  width: max-content;
-  animation: marquee 22s linear infinite;
-  will-change: transform;
-}
