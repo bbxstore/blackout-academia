@@ -4,7 +4,6 @@ import {
   Dumbbell, Users, Zap, ShieldCheck, MessageCircle, Navigation, GalleryHorizontal, Star
 } from 'lucide-react';
 import { GYM_INFO, getWhatsAppUrl, MAPS_URL, MAPS_EMBED_URL, WHATSAPP_MESSAGES } from './constants';
-import Schedules from './pages/Schedules';
 import logoHorizontal from './assets/logo-horizontal.webp';
 import logoSymbol from './assets/logo-symbol.webp';
 import heroImage from './assets/gym-hero.webp';
@@ -59,13 +58,6 @@ const NeonButton = ({
   );
 };
 
-const navigateTo = (path: string) => {
-  if (typeof window === 'undefined') return;
-  window.history.pushState({}, '', path);
-  window.dispatchEvent(new PopStateEvent('popstate'));
-  window.scrollTo(0, 0);
-};
-
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -82,7 +74,7 @@ const Home = () => {
     { name: 'Sobre', href: '#sobre' },
     { name: 'Modalidades', href: '#modalidades' },
     { name: 'Planos', href: '#planos' },
-    { name: 'Horários', href: '/horarios', internal: true },
+    { name: 'Horários', href: '/horarios/' },
     { name: 'Contato', href: '#contato' },
   ];
 
@@ -120,7 +112,6 @@ const Home = () => {
               <a
                 key={link.name}
                 href={link.href}
-                onClick={link.internal ? (e) => { e.preventDefault(); navigateTo(link.href); } : undefined}
                 className="text-xs font-black uppercase tracking-widest hover:text-brand-green transition-colors"
               >
                 {link.name}
@@ -149,10 +140,6 @@ const Home = () => {
                 href={link.href}
                 onClick={(e) => {
                   setIsMenuOpen(false);
-                  if (link.internal) {
-                    e.preventDefault();
-                    navigateTo(link.href);
-                  }
                 }}
                 className="text-4xl font-display uppercase italic hover:text-brand-green"
               >
@@ -226,7 +213,7 @@ const Home = () => {
               <NeonButton href={getWhatsAppUrl(WHATSAPP_MESSAGES.general)} className="text-xl">
                 QUERO TREINAR NA BLACKOUT
               </NeonButton>
-              <a href="/horarios" onClick={(e) => { e.preventDefault(); navigateTo('/horarios'); }} className="flex items-center justify-center gap-3 font-display uppercase italic text-xl text-white hover:text-brand-green transition-all border-2 border-white/10 px-8 py-4 hover:border-brand-green/50">
+              <a href="/horarios/" className="flex items-center justify-center gap-3 font-display uppercase italic text-xl text-white hover:text-brand-green transition-all border-2 border-white/10 px-8 py-4 hover:border-brand-green/50">
                 VER HORÁRIOS E AULAS <ArrowRight className="w-6 h-6" />
               </a>
             </div>
@@ -534,15 +521,5 @@ const Home = () => {
 };
 
 export default function App() {
-  const [path, setPath] = useState(
-    typeof window !== 'undefined' ? window.location.pathname : '/'
-  );
-
-  useEffect(() => {
-    const onPop = () => setPath(window.location.pathname);
-    window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
-  }, []);
-
-  return path === '/horarios' ? <Schedules /> : <Home />;
+  return <Home />;
 }
