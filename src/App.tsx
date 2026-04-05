@@ -30,7 +30,7 @@ const BrandLogo = ({ compact = false, className = '' }: { compact?: boolean; cla
   <img
     src={compact ? logoSymbol : logoHorizontal}
     alt="Blackout Academia"
-    className={compact ? `h-12 md:h-14 w-auto ${className}` : `h-20 md:h-24 w-auto ${className}`}
+    className={compact ? `h-14 md:h-16 w-auto ${className}` : `h-28 md:h-32 lg:h-36 w-auto ${className}`}
   />
 );
 
@@ -163,10 +163,6 @@ const Home = () => {
 
         <div className="container mx-auto px-6 relative z-10">
           <div>
-            <div className="mb-8 max-w-[320px] md:max-w-[460px]">
-              <BrandLogo />
-            </div>
-
             <div className="flex items-center gap-3 mb-6">
               <div className="h-[3px] w-16 bg-brand-green shadow-[0_0_10px_rgba(57,255,20,0.8)]" />
               <span className="text-brand-green font-black uppercase tracking-[0.4em] text-sm italic">RAMOS, RJ</span>
