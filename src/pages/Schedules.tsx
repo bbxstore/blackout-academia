@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Clock, MessageCircle, ArrowLeft, Sun, Moon, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { GYM_INFO, getWhatsAppUrl, WHATSAPP_MESSAGES } from '../constants';
-import logoHorizontal from '../assets/logo-horizontal.png';
+import logoHorizontal from '../assets/logo-horizontal.webp';
 import scheduleBoard from '../assets/schedule-board.jpg';
 
 const ScheduleCard = ({ title, classes, icon: Icon }: { title: string; classes: any[]; icon: any }) => (
@@ -64,7 +64,7 @@ export default function Schedules() {
         <div className="container mx-auto px-6 flex items-center justify-between gap-6">
           <Link to="/" className="flex items-center gap-3 group min-w-0">
             <ArrowLeft className="text-brand-green group-hover:-translate-x-1 transition-transform shrink-0" />
-            <img src={logoHorizontal} alt="Blackout Academia" className="h-20 md:h-24 w-auto min-w-0" />
+            <img src={logoHorizontal} alt="Blackout Academia" className="h-16 md:h-20 w-auto min-w-0" />
           </Link>
 
           <a
