@@ -30,7 +30,7 @@ const BrandLogo = ({ compact = false, className = '' }: { compact?: boolean; cla
   <img
     src={compact ? logoSymbol : logoHorizontal}
     alt="Blackout Academia"
-    className={compact ? `h-10 w-auto ${className}` : `h-14 md:h-16 w-auto ${className}`}
+    className={compact ? `h-12 md:h-14 w-auto ${className}` : `h-20 md:h-24 w-auto ${className}`}
   />
 );
 
@@ -144,7 +144,7 @@ const Home = () => {
       )}
 
       <div className="bg-brand-green py-2 overflow-hidden whitespace-nowrap relative z-20 border-y border-black/10">
-        <div className="flex gap-10 items-center animate-[marquee_20s_linear_infinite] min-w-max">
+        <div className="marquee-track flex gap-10 items-center min-w-max">
           {[...Array(10)].map((_, i) => (
             <span key={i} className="text-black font-display italic uppercase text-sm tracking-tighter flex items-center gap-4">
               #NOPAINNOGAIN <Zap size={14} /> SUPERAÇÃO <Zap size={14} /> DISCIPLINA <Zap size={14} /> QUALIDADE DE VIDA <Zap size={14} />
@@ -163,7 +163,7 @@ const Home = () => {
 
         <div className="container mx-auto px-6 relative z-10">
           <div>
-            <div className="mb-8 max-w-[230px] md:max-w-[320px]">
+            <div className="mb-8 max-w-[320px] md:max-w-[460px]">
               <BrandLogo />
             </div>
 
