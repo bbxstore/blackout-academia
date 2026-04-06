@@ -1,6 +1,5 @@
 {
   "rewrites": [
-    { "source": "/horarios", "destination": "/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

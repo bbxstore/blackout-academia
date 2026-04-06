@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Instagram, MapPin, Phone, Clock, CheckCircle2, ArrowRight, Menu, X,
-  Dumbbell, Users, Zap, ShieldCheck, MessageCircle, Navigation, GalleryHorizontal, Star, Sun, Moon, Info
+  Dumbbell, Users, Zap, ShieldCheck, MessageCircle, Navigation, GalleryHorizontal, Star
 } from 'lucide-react';
 import { GYM_INFO, getWhatsAppUrl, MAPS_URL, MAPS_EMBED_URL, WHATSAPP_MESSAGES } from './constants';
 import logoHorizontal from './assets/logo-horizontal.webp';
@@ -59,7 +59,6 @@ const NeonButton = ({
   );
 };
 
-
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -111,15 +110,11 @@ const Home = () => {
 
           <nav className="hidden lg:flex items-center gap-10">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-xs font-black uppercase tracking-widest hover:text-brand-green transition-colors"
-              >
+              <a key={link.name} href={link.href} className="text-xs font-black uppercase tracking-widest hover:text-brand-green transition-colors">
                 {link.name}
               </a>
             ))}
-            <a href={getWhatsAppUrl(WHATSAPP_MESSAGES.general)} target="_blank" rel="noopener noreferrer" className="text-brand-green border border-brand-green px-5 py-2 text-xs font-black uppercase tracking-widest hover:bg-brand-green hover:text-black transition-all">
+            <a href={getWhatsAppUrl(WHATSAPP_MESSAGES.general)} className="text-brand-green border border-brand-green px-5 py-2 text-xs font-black uppercase tracking-widest hover:bg-brand-green hover:text-black transition-all">
               WhatsApp
             </a>
           </nav>
@@ -137,14 +132,7 @@ const Home = () => {
           </div>
           <div className="flex flex-col gap-8 mt-16">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => {
-                  setIsMenuOpen(false);
-                }}
-                className="text-4xl font-display uppercase italic hover:text-brand-green"
-              >
+              <a key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-4xl font-display uppercase italic hover:text-brand-green">
                 {link.name}
               </a>
             ))}
@@ -215,7 +203,7 @@ const Home = () => {
               <NeonButton href={getWhatsAppUrl(WHATSAPP_MESSAGES.general)} className="text-xl">
                 QUERO TREINAR NA BLACKOUT
               </NeonButton>
-              <a href="/horarios" onClick={(e) => { e.preventDefault(); navigateTo('/horarios'); }} className="flex items-center justify-center gap-3 font-display uppercase italic text-xl text-white hover:text-brand-green transition-all border-2 border-white/10 px-8 py-4 hover:border-brand-green/50">
+              <a href="#horarios" className="flex items-center justify-center gap-3 font-display uppercase italic text-xl text-white hover:text-brand-green transition-all border-2 border-white/10 px-8 py-4 hover:border-brand-green/50">
                 VER HORÁRIOS E AULAS <ArrowRight className="w-6 h-6" />
               </a>
             </div>
@@ -374,13 +362,9 @@ const Home = () => {
 
       <section id="horarios" className="py-32 bg-brand-dark">
         <div className="container mx-auto px-6">
-          <SectionTitle subtitle="Funcionamento + aulas">HORÁRIOS E AULAS COLETIVAS</SectionTitle>
-          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
-            <div className="bg-brand-graphite border-2 border-brand-green/20 p-8 bg-carbon relative">
-              <div className="flex items-center gap-3 mb-8">
-                <Clock size={30} className="text-brand-green" />
-                <h3 className="text-3xl font-display italic uppercase tracking-tight">Funcionamento</h3>
-              </div>
+          <SectionTitle subtitle="Funcionamento">HORÁRIOS QUE CABEM NA SUA ROTINA</SectionTitle>
+          <div className="grid lg:grid-cols-[0.78fr_1.22fr] gap-10 items-start">
+            <div className="bg-black/40 border border-white/10 p-8">
               <p className="text-brand-silver/80 font-accent font-bold text-lg leading-relaxed mb-8">Funcionamos de segunda a sexta, das 06h às 22h, e aos sábados, das 08h às 14h.</p>
               <div className="space-y-4 mb-8">
                 {[
@@ -390,86 +374,82 @@ const Home = () => {
                 ].map(([day, time]) => (
                   <div key={day} className="flex items-center justify-between border-b border-white/10 py-3 text-sm font-black uppercase tracking-widest gap-4">
                     <span className="text-white">{day}</span>
-                    <span className={`${time === 'Fechado' ? 'text-red-400' : 'text-brand-green'} whitespace-nowrap`}>{time}</span>
+                    <span className="text-brand-green whitespace-nowrap">{time}</span>
                   </div>
                 ))}
               </div>
-              <div className="overflow-hidden border border-brand-green/15 bg-black mb-6">
-                <img src={scheduleBoard} alt="Quadro de horários Blackout" className="w-full h-auto object-cover" />
-              </div>
               <div className="p-4 bg-brand-green/5 border border-brand-green/10 flex gap-4 items-start">
-                <Info className="text-brand-green shrink-0" size={20} />
+                <Clock className="text-brand-green shrink-0" size={20} />
                 <p className="text-[10px] text-brand-silver/60 font-accent font-black uppercase tracking-widest leading-relaxed">
-                  Se houver qualquer dúvida visual em algum horário da grade, considerar apenas o que estiver claramente legível e confirmar o restante com a equipe.
+                  Em caso de ajuste de grade, turma ou horário, confirme diretamente com a equipe pelo WhatsApp.
                 </p>
               </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-brand-graphite border border-white/10 p-8 bg-carbon">
-                <div className="flex items-center gap-3 mb-6">
-                  <Sun className="text-brand-green" size={26} />
-                  <h3 className="text-3xl font-display italic uppercase tracking-tight">Aulas manhã</h3>
-                </div>
-                <div className="space-y-6">
-                  {[
-                    { day: 'Segunda', sessions: [{ name: 'Ritbox', time: '08h' }] },
-                    { day: 'Terça', sessions: [{ name: 'Funcional', time: '07h' }, { name: 'Spinning e Jump', time: '08h' }] },
-                    { day: 'Quarta', sessions: [{ name: 'Ritbox', time: '08h' }] },
-                    { day: 'Quinta', sessions: [{ name: 'Funcional', time: '07h' }, { name: 'Spinning e Jump', time: '08h' }] },
-                  ].map((item) => (
-                    <div key={item.day} className="border-b border-white/5 pb-4 last:border-0 last:pb-0">
-                      <h4 className="text-brand-green font-accent font-black uppercase text-xs tracking-widest mb-3">// {item.day}</h4>
-                      <div className="space-y-2">
-                        {item.sessions.map((session) => (
-                          <div key={`${item.day}-${session.name}-${session.time}`} className="flex justify-between items-center gap-3">
-                            <span className="text-white font-display italic uppercase text-lg">{session.name}</span>
-                            <span className="bg-white/5 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-brand-silver border border-white/10 whitespace-nowrap">{session.time}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="bg-brand-graphite border border-white/10 p-8 bg-carbon">
-                <div className="flex items-center gap-3 mb-6">
-                  <Moon className="text-brand-green" size={26} />
-                  <h3 className="text-3xl font-display italic uppercase tracking-tight">Aulas noite</h3>
-                </div>
-                <div className="space-y-6">
-                  {[
-                    { day: 'Segunda', sessions: [{ name: 'Spinning', time: '19h' }, { name: 'Ritmos', time: '19h' }] },
-                    { day: 'Terça', sessions: [{ name: 'Jump', time: '18h' }, { name: 'HIIT', time: '19h' }] },
-                    { day: 'Quarta', sessions: [{ name: 'Spinning', time: '19h' }, { name: 'Ritmos', time: '19h' }] },
-                    { day: 'Quinta', sessions: [{ name: 'Jump', time: '18h' }, { name: 'HIIT', time: '19h' }] },
-                    { day: 'Sexta', sessions: [{ name: 'Spinning', time: '19h' }] },
-                  ].map((item) => (
-                    <div key={item.day} className="border-b border-white/5 pb-4 last:border-0 last:pb-0">
-                      <h4 className="text-brand-green font-accent font-black uppercase text-xs tracking-widest mb-3">// {item.day}</h4>
-                      <div className="space-y-2">
-                        {item.sessions.map((session) => (
-                          <div key={`${item.day}-${session.name}-${session.time}`} className="flex justify-between items-center gap-3">
-                            <span className="text-white font-display italic uppercase text-lg">{session.name}</span>
-                            <span className="bg-white/5 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-brand-silver border border-white/10 whitespace-nowrap">{session.time}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+              <div className="mt-8">
+                <NeonButton href={getWhatsAppUrl(WHATSAPP_MESSAGES.classes)}>QUERO CONFIRMAR OS HORÁRIOS</NeonButton>
               </div>
             </div>
-          </div>
 
-          <div className="mt-10 border border-white/10 overflow-hidden bg-black/50">
-            <img src={neonImage} alt="Ambiente Blackout" className="w-full h-72 object-cover" />
-            <div className="p-8">
-              <p className="text-brand-green text-[10px] font-black uppercase tracking-[0.35em] mb-3">Confirmação rápida</p>
-              <h3 className="text-3xl font-display italic uppercase mb-4">FICOU NA DÚVIDA SOBRE A GRADE?</h3>
-              <p className="text-brand-silver/70 text-sm font-accent font-bold leading-relaxed mb-6">Em caso de ajuste de grade, turma ou horário, confirme diretamente com a equipe pelo WhatsApp.</p>
-              <NeonButton href={getWhatsAppUrl(WHATSAPP_MESSAGES.classes)}>QUERO CONFIRMAR OS HORÁRIOS</NeonButton>
+            <div id="quadro-aulas" className="space-y-8">
+              <div className="border border-white/10 overflow-hidden bg-black/50">
+                <img src={scheduleBoard} alt="Quadro de horários Blackout" className="w-full h-auto object-cover" />
+              </div>
+
+              <div className="grid xl:grid-cols-2 gap-8">
+                <div className="card-dark border-l-4 border-l-brand-green/20">
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="text-brand-green bg-brand-green/10 p-3"><Clock size={24} /></div>
+                    <h3 className="text-2xl font-display italic uppercase tracking-tight">Aulas manhã</h3>
+                  </div>
+                  <div className="space-y-6">
+                    {[
+                      { day: 'Segunda', sessions: [{ name: 'Ritbox', time: '08h' }] },
+                      { day: 'Terça', sessions: [{ name: 'Funcional', time: '07h' }, { name: 'Spinning e Jump', time: '08h' }] },
+                      { day: 'Quarta', sessions: [{ name: 'Ritbox', time: '08h' }] },
+                      { day: 'Quinta', sessions: [{ name: 'Funcional', time: '07h' }, { name: 'Spinning e Jump', time: '08h' }] },
+                    ].map((item, idx) => (
+                      <div key={idx} className="border-b border-white/5 pb-4 last:border-0 last:pb-0">
+                        <h4 className="text-brand-green font-accent font-black uppercase text-xs tracking-widest mb-3">// {item.day}</h4>
+                        <div className="space-y-2">
+                          {item.sessions.map((session, sIdx) => (
+                            <div key={sIdx} className="flex justify-between items-center gap-3">
+                              <span className="text-white font-display italic uppercase text-lg">{session.name}</span>
+                              <span className="bg-white/5 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-brand-silver border border-white/10 whitespace-nowrap">{session.time}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="card-dark border-l-4 border-l-brand-green/20">
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="text-brand-green bg-brand-green/10 p-3"><Clock size={24} /></div>
+                    <h3 className="text-2xl font-display italic uppercase tracking-tight">Aulas noite</h3>
+                  </div>
+                  <div className="space-y-6">
+                    {[
+                      { day: 'Segunda', sessions: [{ name: 'Spinning', time: '19h' }, { name: 'Ritmos', time: '19h' }] },
+                      { day: 'Terça', sessions: [{ name: 'Jump', time: '18h' }, { name: 'HIIT', time: '19h' }] },
+                      { day: 'Quarta', sessions: [{ name: 'Spinning', time: '19h' }, { name: 'Ritmos', time: '19h' }] },
+                      { day: 'Quinta', sessions: [{ name: 'Jump', time: '18h' }, { name: 'HIIT', time: '19h' }] },
+                      { day: 'Sexta', sessions: [{ name: 'Spinning', time: '19h' }] },
+                    ].map((item, idx) => (
+                      <div key={idx} className="border-b border-white/5 pb-4 last:border-0 last:pb-0">
+                        <h4 className="text-brand-green font-accent font-black uppercase text-xs tracking-widest mb-3">// {item.day}</h4>
+                        <div className="space-y-2">
+                          {item.sessions.map((session, sIdx) => (
+                            <div key={sIdx} className="flex justify-between items-center gap-3">
+                              <span className="text-white font-display italic uppercase text-lg">{session.name}</span>
+                              <span className="bg-white/5 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-brand-silver border border-white/10 whitespace-nowrap">{session.time}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
