@@ -11,7 +11,6 @@ import aboutImage from './assets/gym-floor-1.webp';
 import floorImage from './assets/gym-floor-2.webp';
 import machineImage from './assets/gym-floor-3.webp';
 import neonImage from './assets/gym-neon.webp';
-import scheduleBoard from './assets/schedule-board.jpg';
 
 const SectionTitle = ({ children, subtitle }: { children: React.ReactNode; subtitle?: string }) => (
   <div className="mb-16 text-left relative">
@@ -390,8 +389,51 @@ const Home = () => {
             </div>
 
             <div id="quadro-aulas" className="space-y-8">
-              <div className="border border-white/10 overflow-hidden bg-black/50">
-                <img src={scheduleBoard} alt="Quadro de horários Blackout" className="w-full h-auto object-cover" />
+              <div className="border border-white/10 bg-black/50 p-6 md:p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="text-brand-green bg-brand-green/10 p-3"><Clock size={24} /></div>
+                  <div>
+                    <h3 className="text-2xl font-display italic uppercase tracking-tight">Quadro de aulas coletivas</h3>
+                    <p className="text-brand-silver/60 text-xs font-black uppercase tracking-[0.25em] mt-2">Somente os horários confirmados na grade enviada</p>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h4 className="text-brand-green font-accent font-black uppercase text-xs tracking-widest mb-4">// Manhã</h4>
+                    <div className="space-y-3">
+                      {[
+                        ['Segunda', '08h · Ritbox'],
+                        ['Terça', '07h · Funcional | 08h · Spinning e Jump'],
+                        ['Quarta', '08h · Ritbox'],
+                        ['Quinta', '07h · Funcional | 08h · Spinning e Jump'],
+                      ].map(([day, info]) => (
+                        <div key={day} className="flex flex-col gap-1 border-b border-white/5 pb-3 last:border-0 last:pb-0">
+                          <span className="text-white text-sm font-black uppercase tracking-widest">{day}</span>
+                          <span className="text-brand-silver/70 text-sm font-accent font-bold">{info}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-brand-green font-accent font-black uppercase text-xs tracking-widest mb-4">// Noite</h4>
+                    <div className="space-y-3">
+                      {[
+                        ['Segunda', '19h · Spinning | 19h · Ritmos'],
+                        ['Terça', '18h · Jump | 19h · HIIT'],
+                        ['Quarta', '19h · Spinning | 19h · Ritmos'],
+                        ['Quinta', '18h · Jump | 19h · HIIT'],
+                        ['Sexta', '19h · Spinning'],
+                      ].map(([day, info]) => (
+                        <div key={day} className="flex flex-col gap-1 border-b border-white/5 pb-3 last:border-0 last:pb-0">
+                          <span className="text-white text-sm font-black uppercase tracking-widest">{day}</span>
+                          <span className="text-brand-silver/70 text-sm font-accent font-bold">{info}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="grid xl:grid-cols-2 gap-8">
