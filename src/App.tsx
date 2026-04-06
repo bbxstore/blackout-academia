@@ -4,6 +4,7 @@ import {
   Dumbbell, Users, Zap, ShieldCheck, MessageCircle, Navigation, GalleryHorizontal, Star
 } from 'lucide-react';
 import { GYM_INFO, getWhatsAppUrl, MAPS_URL, MAPS_EMBED_URL, WHATSAPP_MESSAGES } from './constants';
+import Schedules from './pages/Schedules';
 import logoHorizontal from './assets/logo-horizontal.webp';
 import logoSymbol from './assets/logo-symbol.webp';
 import heroImage from './assets/gym-hero.webp';
@@ -29,7 +30,7 @@ const BrandLogo = ({ compact = false, className = '' }: { compact?: boolean; cla
   <img
     src={compact ? logoSymbol : logoHorizontal}
     alt="Blackout Academia"
-    className={compact ? `h-14 md:h-16 w-auto ${className}` : `h-28 md:h-32 lg:h-36 w-auto ${className}`}
+    className={compact ? `h-12 md:h-14 w-auto ${className}` : `h-20 md:h-24 w-auto ${className}`}
   />
 );
 
@@ -74,7 +75,7 @@ const Home = () => {
     { name: 'Sobre', href: '#sobre' },
     { name: 'Modalidades', href: '#modalidades' },
     { name: 'Planos', href: '#planos' },
-    { name: 'Horários', href: '/horarios/' },
+    { name: 'Horários', href: '/horarios' },
     { name: 'Contato', href: '#contato' },
   ];
 
@@ -109,11 +110,7 @@ const Home = () => {
 
           <nav className="hidden lg:flex items-center gap-10">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-xs font-black uppercase tracking-widest hover:text-brand-green transition-colors"
-              >
+              <a key={link.name} href={link.href} className="text-xs font-black uppercase tracking-widest hover:text-brand-green transition-colors">
                 {link.name}
               </a>
             ))}
@@ -135,14 +132,7 @@ const Home = () => {
           </div>
           <div className="flex flex-col gap-8 mt-16">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => {
-                  setIsMenuOpen(false);
-                }}
-                className="text-4xl font-display uppercase italic hover:text-brand-green"
-              >
+              <a key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-4xl font-display uppercase italic hover:text-brand-green">
                 {link.name}
               </a>
             ))}
@@ -173,6 +163,10 @@ const Home = () => {
 
         <div className="container mx-auto px-6 relative z-10">
           <div>
+            <div className="mb-8 max-w-[320px] md:max-w-[460px]">
+              <BrandLogo />
+            </div>
+
             <div className="flex items-center gap-3 mb-6">
               <div className="h-[3px] w-16 bg-brand-green shadow-[0_0_10px_rgba(57,255,20,0.8)]" />
               <span className="text-brand-green font-black uppercase tracking-[0.4em] text-sm italic">RAMOS, RJ</span>
@@ -213,7 +207,7 @@ const Home = () => {
               <NeonButton href={getWhatsAppUrl(WHATSAPP_MESSAGES.general)} className="text-xl">
                 QUERO TREINAR NA BLACKOUT
               </NeonButton>
-              <a href="/horarios/" className="flex items-center justify-center gap-3 font-display uppercase italic text-xl text-white hover:text-brand-green transition-all border-2 border-white/10 px-8 py-4 hover:border-brand-green/50">
+              <a href="/horarios" className="flex items-center justify-center gap-3 font-display uppercase italic text-xl text-white hover:text-brand-green transition-all border-2 border-white/10 px-8 py-4 hover:border-brand-green/50">
                 VER HORÁRIOS E AULAS <ArrowRight className="w-6 h-6" />
               </a>
             </div>
@@ -387,7 +381,7 @@ const Home = () => {
                 </div>
               ))}
             </div>
-            <a href="/horarios" onClick={(e) => { e.preventDefault(); navigateTo('/horarios'); }} className="inline-flex items-center gap-3 font-display uppercase italic text-xl text-white hover:text-brand-green transition-all border-2 border-white/10 px-8 py-4 hover:border-brand-green/50">VER QUADRO DE AULAS <ArrowRight className="w-6 h-6" /></a>
+            <a href="/horarios" className="inline-flex items-center gap-3 font-display uppercase italic text-xl text-white hover:text-brand-green transition-all border-2 border-white/10 px-8 py-4 hover:border-brand-green/50">VER QUADRO DE AULAS <ArrowRight className="w-6 h-6" /></a>
           </div>
           <div className="border border-white/10 overflow-hidden bg-black/50">
             <img src={neonImage} alt="Ambiente Blackout" className="w-full h-80 object-cover" />
@@ -521,5 +515,15 @@ const Home = () => {
 };
 
 export default function App() {
-  return <Home />;
+  const [path, setPath] = useState(
+    typeof window !== 'undefined' ? window.location.pathname : '/'
+  );
+
+  useEffect(() => {
+    const onPop = () => setPath(window.location.pathname);
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
+
+  return path === '/horarios' ? <Schedules /> : <Home />;
 }
