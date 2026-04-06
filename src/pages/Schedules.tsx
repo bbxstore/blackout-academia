@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Clock, MessageCircle, ArrowLeft, Sun, Moon, Info } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { GYM_INFO, getWhatsAppUrl, WHATSAPP_MESSAGES } from '../constants';
 import logoHorizontal from '../assets/logo-horizontal.webp';
 import scheduleBoard from '../assets/schedule-board.jpg';
@@ -38,6 +37,13 @@ const ScheduleCard = ({ title, classes, icon: Icon }: { title: string; classes: 
   </div>
 );
 
+const goHome = () => {
+  if (typeof window === 'undefined') return;
+  window.history.pushState({}, '', '/');
+  window.dispatchEvent(new PopStateEvent('popstate'));
+  window.scrollTo(0, 0);
+};
+
 export default function Schedules() {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -62,10 +68,10 @@ export default function Schedules() {
     <div className="min-h-screen bg-brand-black text-white selection:bg-brand-green selection:text-black">
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-xl py-4 border-b border-brand-green/20">
         <div className="container mx-auto px-6 flex items-center justify-between gap-6">
-          <Link to="/" className="flex items-center gap-3 group min-w-0">
+          <a href="/" onClick={(e) => { e.preventDefault(); goHome(); }} className="flex items-center gap-3 group min-w-0">
             <ArrowLeft className="text-brand-green group-hover:-translate-x-1 transition-transform shrink-0" />
-            <img src={logoHorizontal} alt="Blackout Academia" className="h-16 md:h-20 w-auto min-w-0" />
-          </Link>
+            <img src={logoHorizontal} alt="Blackout Academia" className="h-20 md:h-24 lg:h-28 w-auto min-w-0" />
+          </a>
 
           <a
             href={getWhatsAppUrl(WHATSAPP_MESSAGES.classes)}
