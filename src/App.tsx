@@ -29,7 +29,7 @@ const BrandLogo = ({ compact = false, className = '' }: { compact?: boolean; cla
   <img
     src={compact ? logoSymbol : logoHorizontal}
     alt="Blackout Academia"
-    className={compact ? `h-14 md:h-16 w-auto ${className}` : `h-28 md:h-32 lg:h-36 w-auto ${className}`}
+    className={compact ? `h-12 md:h-14 w-auto ${className}` : `h-20 md:h-24 w-auto ${className}`}
   />
 );
 
@@ -162,6 +162,10 @@ const Home = () => {
 
         <div className="container mx-auto px-6 relative z-10">
           <div>
+            <div className="mb-8 max-w-[320px] md:max-w-[460px]">
+              <BrandLogo />
+            </div>
+
             <div className="flex items-center gap-3 mb-6">
               <div className="h-[3px] w-16 bg-brand-green shadow-[0_0_10px_rgba(57,255,20,0.8)]" />
               <span className="text-brand-green font-black uppercase tracking-[0.4em] text-sm italic">RAMOS, RJ</span>
@@ -361,87 +365,92 @@ const Home = () => {
 
       <section id="horarios" className="py-32 bg-brand-dark">
         <div className="container mx-auto px-6">
-          <SectionTitle subtitle="Funcionamento">HORÁRIOS QUE CABEM NA SUA ROTINA</SectionTitle>
-          <div className="grid lg:grid-cols-[0.78fr_1.22fr] gap-10 items-start">
-            <div className="bg-black/40 border border-white/10 p-8">
-              <p className="text-brand-silver/80 font-accent font-bold text-lg leading-relaxed mb-8">Funcionamos de segunda a sexta, das 06h às 22h, e aos sábados, das 08h às 14h.</p>
+          <SectionTitle subtitle="Horários">HORÁRIOS E AULAS</SectionTitle>
+
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start mb-10">
+            <div className="border border-white/10 bg-black/40 p-8">
+              <p className="text-brand-green text-[10px] font-black uppercase tracking-[0.35em] mb-4">Funcionamento</p>
+              <h3 className="text-3xl font-display italic uppercase mb-6">HORÁRIOS DA ACADEMIA</h3>
+              <p className="text-brand-silver/75 font-accent font-bold text-base leading-relaxed mb-6">
+                Funcionamos de segunda a sexta, das 06h às 22h, e aos sábados, das 08h às 14h.
+              </p>
               <div className="space-y-4 mb-8">
                 {[
                   ['Segunda a Sexta', GYM_INFO.hours.weekdays],
                   ['Sábado', GYM_INFO.hours.saturday],
-                  ['Domingo', GYM_INFO.hours.sunday]
+                  ['Domingo', GYM_INFO.hours.sunday],
                 ].map(([day, time]) => (
                   <div key={day} className="flex items-center justify-between border-b border-white/10 py-3 text-sm font-black uppercase tracking-widest gap-4">
                     <span className="text-white">{day}</span>
-                    <span className="text-brand-green whitespace-nowrap">{time}</span>
+                    <span className="text-brand-green text-right">{time}</span>
                   </div>
                 ))}
               </div>
-              <div className="p-4 bg-brand-green/5 border border-brand-green/10 flex gap-4 items-start">
-                <Clock className="text-brand-green shrink-0" size={20} />
-                <p className="text-[10px] text-brand-silver/60 font-accent font-black uppercase tracking-widest leading-relaxed">
-                  Em caso de ajuste de grade, turma ou horário, confirme diretamente com a equipe pelo WhatsApp.
-                </p>
-              </div>
-              <div className="mt-8">
-                <NeonButton href={getWhatsAppUrl(WHATSAPP_MESSAGES.classes)}>QUERO CONFIRMAR OS HORÁRIOS</NeonButton>
-              </div>
+              <p className="text-brand-silver/50 text-xs font-black uppercase tracking-[0.22em] leading-relaxed mb-6">
+                Em caso de ajuste de grade, confirme diretamente com a equipe pelo WhatsApp.
+              </p>
+              <NeonButton href={getWhatsAppUrl(WHATSAPP_MESSAGES.classes)}>
+                QUERO CONFIRMAR OS HORÁRIOS
+              </NeonButton>
             </div>
 
-            <div id="quadro-aulas" className="space-y-8">
-              <div className="grid xl:grid-cols-2 gap-8">
-                <div className="card-dark border-l-4 border-l-brand-green/20">
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="text-brand-green bg-brand-green/10 p-3"><Clock size={24} /></div>
-                    <h3 className="text-2xl font-display italic uppercase tracking-tight">Aulas manhã</h3>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="border border-white/10 bg-black/40 p-8">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 border border-brand-green/30 bg-brand-green/10 flex items-center justify-center">
+                    <Clock className="text-brand-green" size={22} />
                   </div>
-                  <div className="space-y-6">
-                    {[
-                      { day: 'Segunda', sessions: [{ name: 'Ritbox', time: '08h' }] },
-                      { day: 'Terça', sessions: [{ name: 'Funcional', time: '07h' }, { name: 'Spinning e Jump', time: '08h' }] },
-                      { day: 'Quarta', sessions: [{ name: 'Ritbox', time: '08h' }] },
-                      { day: 'Quinta', sessions: [{ name: 'Funcional', time: '07h' }, { name: 'Spinning e Jump', time: '08h' }] },
-                    ].map((item, idx) => (
-                      <div key={idx} className="border-b border-white/5 pb-4 last:border-0 last:pb-0">
-                        <h4 className="text-brand-green font-accent font-black uppercase text-xs tracking-widest mb-3">// {item.day}</h4>
-                        <div className="space-y-2">
-                          {item.sessions.map((session, sIdx) => (
-                            <div key={sIdx} className="flex justify-between items-center gap-3">
-                              <span className="text-white font-display italic uppercase text-lg">{session.name}</span>
-                              <span className="bg-white/5 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-brand-silver border border-white/10 whitespace-nowrap">{session.time}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  <h3 className="text-3xl font-display italic uppercase">AULAS MANHÃ</h3>
                 </div>
 
-                <div className="card-dark border-l-4 border-l-brand-green/20">
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="text-brand-green bg-brand-green/10 p-3"><Clock size={24} /></div>
-                    <h3 className="text-2xl font-display italic uppercase tracking-tight">Aulas noite</h3>
+                <div className="space-y-6 text-sm font-black uppercase tracking-wide">
+                  <div className="border-b border-white/10 pb-5">
+                    <p className="text-brand-green mb-2">// Segunda</p>
+                    <p className="text-white">08h · Ritbox</p>
                   </div>
-                  <div className="space-y-6">
-                    {[
-                      { day: 'Segunda', sessions: [{ name: 'Spinning', time: '19h' }, { name: 'Ritmos', time: '19h' }] },
-                      { day: 'Terça', sessions: [{ name: 'Jump', time: '18h' }, { name: 'HIIT', time: '19h' }] },
-                      { day: 'Quarta', sessions: [{ name: 'Spinning', time: '19h' }, { name: 'Ritmos', time: '19h' }] },
-                      { day: 'Quinta', sessions: [{ name: 'Jump', time: '18h' }, { name: 'HIIT', time: '19h' }] },
-                      { day: 'Sexta', sessions: [{ name: 'Spinning', time: '19h' }] },
-                    ].map((item, idx) => (
-                      <div key={idx} className="border-b border-white/5 pb-4 last:border-0 last:pb-0">
-                        <h4 className="text-brand-green font-accent font-black uppercase text-xs tracking-widest mb-3">// {item.day}</h4>
-                        <div className="space-y-2">
-                          {item.sessions.map((session, sIdx) => (
-                            <div key={sIdx} className="flex justify-between items-center gap-3">
-                              <span className="text-white font-display italic uppercase text-lg">{session.name}</span>
-                              <span className="bg-white/5 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-brand-silver border border-white/10 whitespace-nowrap">{session.time}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
+                  <div className="border-b border-white/10 pb-5">
+                    <p className="text-brand-green mb-2">// Terça</p>
+                    <p className="text-white">07h · Funcional | 08h · Spinning e Jump</p>
+                  </div>
+                  <div className="border-b border-white/10 pb-5">
+                    <p className="text-brand-green mb-2">// Quarta</p>
+                    <p className="text-white">08h · Ritbox</p>
+                  </div>
+                  <div>
+                    <p className="text-brand-green mb-2">// Quinta</p>
+                    <p className="text-white">07h · Funcional | 08h · Spinning e Jump</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border border-white/10 bg-black/40 p-8">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 border border-brand-green/30 bg-brand-green/10 flex items-center justify-center">
+                    <Clock className="text-brand-green" size={22} />
+                  </div>
+                  <h3 className="text-3xl font-display italic uppercase">AULAS NOITE</h3>
+                </div>
+
+                <div className="space-y-6 text-sm font-black uppercase tracking-wide">
+                  <div className="border-b border-white/10 pb-5">
+                    <p className="text-brand-green mb-2">// Segunda</p>
+                    <p className="text-white">19h · Spinning | 19h · Ritmos</p>
+                  </div>
+                  <div className="border-b border-white/10 pb-5">
+                    <p className="text-brand-green mb-2">// Terça</p>
+                    <p className="text-white">18h · Jump | 19h · HIIT</p>
+                  </div>
+                  <div className="border-b border-white/10 pb-5">
+                    <p className="text-brand-green mb-2">// Quarta</p>
+                    <p className="text-white">19h · Spinning | 19h · Ritmos</p>
+                  </div>
+                  <div className="border-b border-white/10 pb-5">
+                    <p className="text-brand-green mb-2">// Quinta</p>
+                    <p className="text-white">18h · Jump | 19h · HIIT</p>
+                  </div>
+                  <div>
+                    <p className="text-brand-green mb-2">// Sexta</p>
+                    <p className="text-white">19h · Spinning</p>
                   </div>
                 </div>
               </div>

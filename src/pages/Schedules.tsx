@@ -64,7 +64,7 @@ export default function Schedules() {
         <div className="container mx-auto px-6 flex items-center justify-between gap-6">
           <Link to="/" className="flex items-center gap-3 group min-w-0">
             <ArrowLeft className="text-brand-green group-hover:-translate-x-1 transition-transform shrink-0" />
-            <img src={logoHorizontal} alt="Blackout Academia" className="h-20 md:h-24 lg:h-28 w-auto min-w-0" />
+            <img src={logoHorizontal} alt="Blackout Academia" className="h-16 md:h-20 w-auto min-w-0" />
           </Link>
 
           <a
